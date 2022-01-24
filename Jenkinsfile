@@ -7,6 +7,7 @@ pipeline {
             echo "$GIT_BRANCH"
          }
       }
+/*
       stage('Docker Build') {
          steps {
             pwsh(script: 'docker images -a')
@@ -73,18 +74,19 @@ pipeline {
          environment {
             ENVIRONMENT = 'qa'
          }
-         steps {
-            echo "Deploying to ${ENVIRONMENT}"
-            acsDeploy(
-               azureCredentialsId: "jenkins_demo",
-               configFilePaths: "**/*.yaml",
-               containerService: "${ENVIRONMENT}-demo-cluster | AKS",
-               resourceGroupName: "${ENVIRONMENT}-demo",
-               sshCredentialsId: ""
-            )
-         }
-      }
-      stage('Approve PROD Deploy') {
+         */
+      //   steps {
+       //     echo "Deploying to ${ENVIRONMENT}"
+      //      acsDeploy(
+      //         azureCredentialsId: "jenkins_demo",
+      //         configFilePaths: "**/*.yaml",
+      //         containerService: "${ENVIRONMENT}-demo-cluster | AKS",
+      //         resourceGroupName: "${ENVIRONMENT}-demo",
+      //         sshCredentialsId: ""
+      //      )
+       //  }
+     // }
+     /* stage('Approve PROD Deploy') {
          when {
             branch 'master'
          }
@@ -109,17 +111,17 @@ pipeline {
          }
          environment {
             ENVIRONMENT = 'prod'
+         }*/
+      //   steps {
+        //    echo "Deploying to ${ENVIRONMENT}"
+          //  acsDeploy(
+            //   azureCredentialsId: "jenkins_demo",
+              // configFilePaths: "**/*.yaml",
+              // containerService: "${ENVIRONMENT}-demo-cluster | AKS",
+             //  resourceGroupName: "${ENVIRONMENT}-demo",
+              // sshCredentialsId: ""
+     /*       )
          }
-         steps {
-            echo "Deploying to ${ENVIRONMENT}"
-            acsDeploy(
-               azureCredentialsId: "jenkins_demo",
-               configFilePaths: "**/*.yaml",
-               containerService: "${ENVIRONMENT}-demo-cluster | AKS",
-               resourceGroupName: "${ENVIRONMENT}-demo",
-               sshCredentialsId: ""
-            )
-         }
-      }
+      }*/
    }
 }
