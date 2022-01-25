@@ -21,7 +21,7 @@ pipeline {
             """)
          }
       }
-   /*   stage('Start test app') {
+      stage('Start test app') {
          steps {
             pwsh(script: """
                docker-compose up -d
@@ -64,9 +64,9 @@ pipeline {
             stage('Run Trivy') {
                steps {
                   sleep(time: 30, unit: 'SECONDS')
-                  // pwsh(script: """
-                  // C:\\Windows\\System32\\wsl.exe -- sudo trivy blackdentech/jenkins-course
-                  // """)
+                   pwsh(script: """
+                   C:\\Windows\\System32\\wsl.exe -- sudo trivy blackdentech/jenkins-course
+                   """)
                }
             }
          }
@@ -75,19 +75,19 @@ pipeline {
          environment {
             ENVIRONMENT = 'qa'
          }
-         */
-      //   steps {
-       //     echo "Deploying to ${ENVIRONMENT}"
-      //      acsDeploy(
-      //         azureCredentialsId: "jenkins_demo",
-      //         configFilePaths: "**/*.yaml",
-      //         containerService: "${ENVIRONMENT}-demo-cluster | AKS",
-      //         resourceGroupName: "${ENVIRONMENT}-demo",
-      //         sshCredentialsId: ""
-      //      )
-       //  }
-     // }
-     /* stage('Approve PROD Deploy') {
+        
+         steps {
+            echo "Deploying to ${ENVIRONMENT}"
+            acsDeploy(
+               azureCredentialsId: "jenkins_demo",
+               configFilePaths: "**/*.yaml",
+              containerService: "${ENVIRONMENT}-demo-cluster | AKS",
+               resourceGroupName: "${ENVIRONMENT}-demo",
+               sshCredentialsId: ""
+            )
+         }
+     }
+      stage('Approve PROD Deploy') {
          when {
             branch 'master'
          }
@@ -112,17 +112,17 @@ pipeline {
          }
          environment {
             ENVIRONMENT = 'prod'
-         }*/
-      //   steps {
-        //    echo "Deploying to ${ENVIRONMENT}"
-          //  acsDeploy(
-            //   azureCredentialsId: "jenkins_demo",
-              // configFilePaths: "**/*.yaml",
-              // containerService: "${ENVIRONMENT}-demo-cluster | AKS",
-             //  resourceGroupName: "${ENVIRONMENT}-demo",
-              // sshCredentialsId: ""
-     /*       )
          }
-      }*/
+        steps {
+           echo "Deploying to ${ENVIRONMENT}"
+            acsDeploy(
+              azureCredentialsId: "jenkins_demo",
+               configFilePaths: "**/*.yaml",
+               containerService: "${ENVIRONMENT}-demo-cluster | AKS",
+               resourceGroupName: "${ENVIRONMENT}-demo",
+               sshCredentialsId: ""
+            )
+         }
+      }
    }
 }
