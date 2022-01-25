@@ -2,12 +2,6 @@ pipeline {
    agent any
 
    stages {
-      stage('Initialize'){
-        steps{
-           def dockerHome = tool 'Docker_Pipeline'
-           env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
-     }
       stage('Verify Branch') {
          steps {
             echo "$GIT_BRANCH"
@@ -16,6 +10,9 @@ pipeline {
 
       stage('Docker Build') {
          steps {
+            def dockerHome = tool 'Docker_Pipeline'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+            
             sh(script: 'docker images -a')
            /* sh(script: """
                cd azure-vote/
