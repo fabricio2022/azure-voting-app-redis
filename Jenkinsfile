@@ -3,8 +3,10 @@ pipeline {
 
    stages {
       stage('Initialize'){
-        def dockerHome = tool 'Docker_Pipeline'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+        steps{
+           def dockerHome = tool 'Docker_Pipeline'
+           env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
      }
       stage('Verify Branch') {
          steps {
